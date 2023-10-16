@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { globalStyles } from "../globalStyles";
 import { Image } from "react-native";
 import { COLORS, FONT } from "../themes/themes";
+import { useAuth } from "../context/AuthContext";
 
 // Splash Screen
 import SplashScreen from "../screens/SplashScreen";
@@ -109,11 +110,12 @@ export default function RootStackNavigator() {
 
     // Check for user login
     // const { user } = useAuth0();
-    const user = true;
+    // const user = true;
+    const { userId } = useAuth();
 
     return showSplash
         ? <SplashScreen />
-        : !user
+        : !userId
             ? <AuthStack.Navigator initialRouteName="Permission Mic" screenOptions={{
                 headerShown: false,
                 contentStyle: globalStyles.containerAuth
